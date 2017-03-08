@@ -1,0 +1,15 @@
+{
+  "name": "sht31",
+  "version": "1.0.0",
+  "description": "Module for reading SH31 sensor through i2c on Raspberry Pi",
+  "author": "Alwin Arrasyid <alwin.ridd@gmail.com>",
+  "main": "src/index.js",
+  "license": "MIT",
+  "engine": {
+    "node": ">= 6.0.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "i2c": "^0.2.3"
+  }
+}
