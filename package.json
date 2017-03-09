@@ -5,11 +5,21 @@
   "author": "Alwin Arrasyid <alwin.ridd@gmail.com>",
   "main": "src/index.js",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint"
+  },
   "engine": {
     "node": ">= 6.0.0"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
     "i2c": "^0.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "eslint-config-dycode": "^1.3.3",
+    "eslint-plugin-lodash": "^2.3.2",
+    "eslint-plugin-lodash-fp": "^2.1.3",
+    "eslint-plugin-promise": "^3.4.0"
   }
 }

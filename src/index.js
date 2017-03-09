@@ -35,29 +35,29 @@ class SHT31 {
         let rawHumidity;
 
         rawTemperature = read[0];
-        rawTemperature = rawTemperature << 8;
-        rawTemperature = rawTemperature | read[1];
+        rawTemperature <<= 8;
+        rawTemperature |= read[1];
 
         if (read[2] !== utils.crc8(read.slice(0, 2))) {
           return Promise.reject(new Error(`Invalid CRC data!`));
         }
 
         rawHumidity = read[3];
-        rawHumidity = rawHumidity << 8;
-        rawHumidity = rawHumidity | read[4];
+        rawHumidity <<= 8;
+        rawHumidity |= read[4];
 
         if (read[5] !== utils.crc8(read.slice(3, 5))) {
           return Promise.reject(new Error(`Invalid CRC data!`));
         }
 
         let temperature = rawTemperature;
-        temperature = temperature * 175;
-        temperature = temperature / 0xFFFF;
+        temperature *= 175;
+        temperature /= 0xFFFF;
         temperature = -45 + temperature;
 
         let humidity = rawHumidity;
-        humidity = humidity * 100;
-        humidity = humidity / 0xFFFF;
+        humidity *= 100;
+        humidity /= 0xFFFF;
 
         return {
           temperature,
