@@ -1,11 +1,8 @@
 'use strict';
 
 const Promise = require(`bluebird`);
-const i2c = require(`i2c`);
 const utils = require(`./utils`);
-
-const SHT31_SOFTRESET = 0x30A2;
-const SHT31_MEAS_HIGHREP = 0x2400;
+const commands = require(`./commands`);
 
 class SHT31 {
   constructor(address, deviceNo) {
@@ -22,7 +19,7 @@ class SHT31 {
   }
 
   reset() {
-    return this.writeCommand(SHT31_SOFTRESET);
+    return this.writeCommand(commands.SHT31_SOFTRESET);
   }
 
   init() {
@@ -30,7 +27,7 @@ class SHT31 {
   }
 
   readSensorData() {
-    return this.writeCommand(SHT31_MEAS_HIGHREP)
+    return this.writeCommand(commands.SHT31_MEAS_HIGHREP)
       .then(() => utils.delay(500))
       .then(() => this.wire.readAsync(6))
       .then((read) => {
