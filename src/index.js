@@ -8,7 +8,7 @@ class SHT31 {
   constructor(address, deviceNo) {
     this.address = address || 0x44;
     this.deviceNo = (!deviceNo && deviceNo !== 0) ? 1 : deviceNo;
-    this.deviceFile = `/dev/ic2-${deviceNo}`;
+    this.deviceFile = `/dev/i2c-${deviceNo}`;
     this.wire = utils.createWire(this.address, {
       device: this.deviceFile,
     });
