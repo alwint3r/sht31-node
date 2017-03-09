@@ -15,9 +15,9 @@ function writeCommand(wire, cmd) {
 
 function crc8(data) {
   const length = data.length;
-  const crc = 0xFF; // initial data
   const POLYNOMIAL = 0x31; // x8 + x5 + x4 + 1
-  const idx = 0;
+  let crc = 0xFF; // initial data
+  let idx = 0;
 
   for (let j = length; j > 0; --j) {
     crc ^= data[idx];
@@ -29,9 +29,9 @@ function crc8(data) {
         : (crc << 1);
       crc = crc & 255;
     }
-
-    return crc;
   }
+
+  return crc;
 }
 
 function delay(ms) {
