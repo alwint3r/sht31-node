@@ -3,6 +3,10 @@ SHT31 Library for Node.js
 
 Read temperature and humidity from SHT31 via i2c on a Raspberry Pi.
 
+## Requirements
+
+Node v6 or newer.
+
 
 ## Usage
 
