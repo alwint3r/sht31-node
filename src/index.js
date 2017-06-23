@@ -31,6 +31,10 @@ class SHT31 {
       .then(() => utils.delay(500))
       .then(() => this.wire.readAsync(6))
       .then((read) => {
+        if (!read || !Array.isArray(read)) {
+          return Promise.reject(new Error(`No data returned from sensor.`));
+        }
+
         let rawTemperature;
         let rawHumidity;
 
