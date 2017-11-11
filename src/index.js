@@ -69,6 +69,43 @@ class SHT31 {
         };
       });
   }
+
+  readStatus() {
+    return this.writeCommand(commands.SHT31_STATUS)
+      .then(() => this.wire.readAsync(3))
+      .then((read) => {
+
+        if(read[2] !== utils.crc8(read.slice(0,2))) {
+          return Promise.reject(new Error(`Invalid CRC data!`));
+        }
+
+        return {
+          WriteStatus: !(read[1] & 0x01),
+          CommandStatus: !(read[1] & 0x02),
+          ResetDetected: !!(read[1] & 0x10),
+          TempTrackingAlert: !!(read[0] & 0x04),
+          RHTrackingAlert: !!(read[0] & 0x08),
+          HeaterEnabled: !!(read[0] & 0x20),
+          AlertPending: !!(read[0] & 0x80)
+        };
+      });
+  }
+
+  enableHeater(duration) {
+    const cmd = this.writeCommand(commands.SHT31_HEATER_ON);
+    if(duration) {
+      return cmd
+        .then(() => utils.delay(duration))
+        .then(() => this.disableHeater());
+    } else {
+      return cmd;
+    }
+  }
+
+  disableHeater(){
+    return this.writeCommand(commands.SHT31_HEATER_OFF);
+  }
+
 }
 
 module.exports = SHT31;
